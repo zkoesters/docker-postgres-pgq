@@ -2,7 +2,7 @@
 # When processing the rules for tagging and pushing container images with the
 # "latest" tag, the following variable will be the version that is considered
 # to be the latest.
-LATEST_VERSION=15-3.3
+LATEST_VERSION=15-3.5
 
 # The following flags are set based on VERSION and VARIANT environment variables
 # that may have been specified, and are used by rules to determine which
@@ -52,8 +52,8 @@ endif
 
 # The repository and image names default to the official but can be overriden
 # via environment variables.
-REPO_NAME  ?= postgis
-IMAGE_NAME ?= postgis
+REPO_NAME  ?= zkoesters
+IMAGE_NAME ?= postgres-pgq
 
 DOCKER=docker
 DOCKERHUB_DESC_IMG=peterevans/dockerhub-description:latest
@@ -101,11 +101,11 @@ test: $(foreach version,$(VERSIONS),test-$(version))
 define test-version
 test-$1: test-prepare build-$1
 ifeq ($(do_default),true)
-	$(OFFIMG_LOCAL_CLONE)/test/run.sh -c $(OFFIMG_LOCAL_CLONE)/test/config.sh -c test/postgis-config.sh $(REPO_NAME)/$(IMAGE_NAME):$(version)
+	$(OFFIMG_LOCAL_CLONE)/test/run.sh -c $(OFFIMG_LOCAL_CLONE)/test/config.sh -c test/pgq-config.sh $(REPO_NAME)/$(IMAGE_NAME):$(version)
 endif
 ifeq ($(do_alpine),true)
 ifneq ("$(wildcard $1/alpine)","")
-	$(OFFIMG_LOCAL_CLONE)/test/run.sh -c $(OFFIMG_LOCAL_CLONE)/test/config.sh -c test/postgis-config.sh $(REPO_NAME)/$(IMAGE_NAME):$(version)-alpine
+	$(OFFIMG_LOCAL_CLONE)/test/run.sh -c $(OFFIMG_LOCAL_CLONE)/test/config.sh -c test/pgq-config.sh $(REPO_NAME)/$(IMAGE_NAME):$(version)-alpine
 endif
 endif
 endef
