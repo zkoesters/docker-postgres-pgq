@@ -4,118 +4,88 @@ services:
 
 stages:
   - build
-  - test
-  - push
+
+variables:
+  LATEST_VERSION: 15-3.5
 
 before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+.build:
+  script:
+    - |
+      BUILDER_NAME=builder-$CI_RUNNER_ID
+      if ! docker buildx ls | grep $BUILDER_NAME; then
+        docker buildx create --name $BUILDER_NAME --use
+      fi
+    - docker buildx build --builder $$BUILDER_NAME --pull --push --platform linux/amd64,linux/arm64/v8 --tag "$CI_REGISTRY_IMAGE:$VERSION${ALPINE:+-alpine}" $VERSION${ALPINE:+/alpine}
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - $VERSION${ALPINE:+/alpine}/Dockerfile
+      when: on_success
 
 postgres:11-3.5:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:11-3.5" --platform linux/amd64,linux/arm64/v8 --push 11-3.5
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 11-3.5/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 11-3.5
 
 postgres:11-3.5-alpine:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:11-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 11-3.5/alpine
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 11-3.5/alpine/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 11-3.5
+    ALPINE: "true"
 
 postgres:12-3.5:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:12-3.5" --platform linux/amd64,linux/arm64/v8 --push 12-3.5
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 12-3.5/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 12-3.5
 
 postgres:12-3.5-alpine:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:12-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 12-3.5/alpine
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 11-3.5/alpine/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 12-3.5
+    ALPINE: "true"
 
 postgres:13-3.5:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:13-3.5" --platform linux/amd64,linux/arm64/v8 --push 13-3.5
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 13-3.5/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 13-3.5
 
 postgres:13-3.5-alpine:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:13-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 13-3.5/alpine
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 13-3.5/alpine/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 13-3.5
+    ALPINE: "true"
 
 postgres:14-3.5:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:14-3.5" --platform linux/amd64,linux/arm64/v8 --push 14-3.5
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 14-3.5/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 14-3.5
 
 postgres:14-3.5-alpine:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:14-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 14-3.5/alpine
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 14-3.5/alpine/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 14-3.5
+    ALPINE: "true"
 
 postgres:15-3.5:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:15-3.5" --platform linux/amd64,linux/arm64/v8 --push 15-3.5
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 15-3.5/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 15-3.5
 
 postgres:15-3.5-alpine:
   stage: build
-  script:
-    - docker buildx create --use
-    - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:15-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 15-3.5/alpine
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "main"
-      changes:
-        - 15-3.5/alpine/Dockerfile
-      when: on_success
+  extends: .build
+  variables:
+    VERSION: 15-3.5
+    ALPINE: "true"
