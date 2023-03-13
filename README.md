@@ -1,6 +1,6 @@
 # zkoesters/postgres-pgq
 
-The `zkoesters/postgres-pgq` image provides tags for running Postgres with the [PGQ](https://github.com/pgq/pgq) extension installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides debian and alpine variants for PGQ 3.5 for each supported version of Postgres (10, 11, 12, 13, 14 and 15).
+The `zkoesters/postgres-pgq` image provides tags for running Postgres with the [PGQ](https://github.com/pgq/pgq) extension installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides debian and alpine variants for PGQ 3.5 for each supported version of Postgres (11, 12, 13, 14 and 15).
 
 This image ensures that the default database created by the parent `postgres` image will have the following extensions installed:
 
@@ -10,7 +10,7 @@ Unless `-e POSTGRES_DB` is passed to the container at startup time, this databas
 
 # Versions ( 2023-03-11 )
 
-Recomended version for the new users: `postgis/postgis:15-3.5`
+Recomended version for the new users: `zkoesters/postgres-pgq:15-3.5`
 
 ### Debian based ( recommended ):
 

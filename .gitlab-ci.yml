@@ -17,6 +17,8 @@ postgres:11-3.5:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:11-3.5" --platform linux/amd64,linux/arm64/v8 --push 11-3.5
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 11-3.5/Dockerfile
       when: on_success
 
 postgres:11-3.5-alpine:
@@ -26,6 +28,8 @@ postgres:11-3.5-alpine:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:11-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 11-3.5/alpine
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 11-3.5/alpine/Dockerfile
       when: on_success
 
 postgres:12-3.5:
@@ -35,6 +39,8 @@ postgres:12-3.5:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:12-3.5" --platform linux/amd64,linux/arm64/v8 --push 12-3.5
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 12-3.5/Dockerfile
       when: on_success
 
 postgres:12-3.5-alpine:
@@ -44,6 +50,8 @@ postgres:12-3.5-alpine:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:12-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 12-3.5/alpine
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 11-3.5/alpine/Dockerfile
       when: on_success
 
 postgres:13-3.5:
@@ -53,6 +61,8 @@ postgres:13-3.5:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:13-3.5" --platform linux/amd64,linux/arm64/v8 --push 13-3.5
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 13-3.5/Dockerfile
       when: on_success
 
 postgres:13-3.5-alpine:
@@ -62,6 +72,8 @@ postgres:13-3.5-alpine:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:13-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 13-3.5/alpine
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 13-3.5/alpine/Dockerfile
       when: on_success
 
 postgres:14-3.5:
@@ -71,6 +83,8 @@ postgres:14-3.5:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:14-3.5" --platform linux/amd64,linux/arm64/v8 --push 14-3.5
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 14-3.5/Dockerfile
       when: on_success
 
 postgres:14-3.5-alpine:
@@ -80,6 +94,8 @@ postgres:14-3.5-alpine:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:14-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 14-3.5/alpine
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 14-3.5/alpine/Dockerfile
       when: on_success
 
 postgres:15-3.5:
@@ -89,6 +105,8 @@ postgres:15-3.5:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:15-3.5" --platform linux/amd64,linux/arm64/v8 --push 15-3.5
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 15-3.5/Dockerfile
       when: on_success
 
 postgres:15-3.5-alpine:
@@ -98,4 +116,6 @@ postgres:15-3.5-alpine:
     - docker buildx build --pull --tag "$CI_REGISTRY_IMAGE:15-3.5-alpine" --platform linux/amd64,linux/arm64/v8 --push 15-3.5/alpine
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
+      changes:
+        - 15-3.5/alpine/Dockerfile
       when: on_success
