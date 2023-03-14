@@ -19,15 +19,10 @@ before_script:
         docker buildx create --name $BUILDER_NAME --use
       fi
     - |
-      DOCKER_TAGS="$VERSION${ALPINE:+-alpine}"
       if [ "$VERSION" = "$LATEST_VERSION" ]; then
-        if [ "$ALPINE" ]; then
-          DOCKER_TAGS="$DOCKER_TAGS,latest-alpine"
-        else
-          DOCKER_TAGS="$DOCKER_TAGS,latest"
-        fi
+        TAG_LATEST="--tag $CI_REGISTRY_IMAGE:latest${ALPINE:+-alpine}"
       fi
-    - docker buildx build --builder $BUILDER_NAME --pull --push --platform linux/amd64,linux/arm64/v8 --tag "$CI_REGISTRY_IMAGE:$DOCKER_TAGS" $VERSION${ALPINE:+/alpine}
+    - docker buildx build --builder $BUILDER_NAME --pull --push --platform linux/amd64,linux/arm64/v8 --tag "$CI_REGISTRY_IMAGE:$VERSION${ALPINE:+-alpine}" $TAG_LATEST $VERSION${ALPINE:+/alpine}
   rules:
     - if: $CI_COMMIT_REF_NAME == "main"
       changes:
