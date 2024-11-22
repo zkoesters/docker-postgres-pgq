@@ -1,9 +1,9 @@
-# Copyright (c) 2024 Zachary Koesters
-
 name: Tests
 on:
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "**/Dockerfile"
 permissions:
   contents: read
 jobs:
