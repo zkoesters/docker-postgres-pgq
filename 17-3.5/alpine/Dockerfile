@@ -2,13 +2,13 @@
 # NOTE: THIS DOCKERFILE IS GENERATED VIA "make update"! PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM postgres:12-alpine3.17
+FROM postgres:17-alpine3.20
 
-LABEL maintainer="Zachary Koesters <zachary@koesters.io>"
+LABEL maintainer="Zachary Koesters <zachary@koeste.rs>"
 
-ENV PGQ_VERSION 3.5
-ENV PGQ_SHA256 835b6521e858795e3199e4ba0253f52e0ab1985e38f11f201e6994d4b5eff1a5
-ENV PGQD_SHA256 a666e5e735f093ef09823ef0df1ba562b52e8fc9081ba1c8b3c3d662658f4916
+ENV PGQ_VERSION=3.5
+ENV PGQ_SHA256=c5ab6f17138979e409aba412ecc3064ace8bbe334ee5d3fc00556ceecb820755
+ENV PGQD_SHA256=a666e5e735f093ef09823ef0df1ba562b52e8fc9081ba1c8b3c3d662658f4916
 
 
 RUN set -eux \
@@ -20,7 +20,7 @@ RUN set -eux \
     \
 # get PGQ
     \
-    && wget -O pgq.tar.gz "https://github.com/pgq/pgq/releases/download/v${PGQ_VERSION}/pgq-${PGQ_VERSION}.tar.gz" \
+    && wget -O pgq.tar.gz "https://github.com/pgq/pgq/releases/download/v3.5.1/pgq-3.5.1.tar.gz" \
     && echo "${PGQ_SHA256} *pgq.tar.gz" | sha256sum -c - \
     && mkdir -p /usr/src/pgq \
     && tar \
@@ -32,7 +32,7 @@ RUN set -eux \
     \
 # get PGQD
     \
-    && wget -O pgqd.tar.gz "https://github.com/pgq/pgqd/releases/download/v${PGQ_VERSION}/pgqd-${PGQ_VERSION}.tar.gz" \
+    && wget -O pgqd.tar.gz "https://github.com/pgq/pgqd/releases/download/v3.5/pgqd-3.5.tar.gz" \
     && echo "${PGQD_SHA256} *pgqd.tar.gz" | sha256sum -c - \
     && mkdir -p /usr/src/pgqd \
     && tar \
@@ -44,14 +44,14 @@ RUN set -eux \
     \
     && apk add --no-cache --virtual .build-deps \
         \
-        clang-dev \
+        clang15-dev \
         g++ \
         gcc \
         libevent-dev \
-        llvm-dev \
+        llvm15-dev \
         make \
-        python3-dev \
         py3-docutils \
+        python3-dev \
     \
 # build PGQ
     \
@@ -69,10 +69,10 @@ RUN set -eux \
 # add .pgq-rundeps
     && apk add --no-cache --virtual .pgq-rundeps \
         \
+        ca-certificates \
         libevent \
         libstdc++ \
         python3 \
-        ca-certificates \
 # clean
     && cd / \
     && rm -rf /usr/src/pgq \

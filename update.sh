@@ -27,14 +27,14 @@ IFS=$'\n'
 versions=($(echo "${versions[*]}" | sort -V))
 unset IFS
 
-defaultAlpinenSuite='3.17'
-defaultDebianSuite='bullseye-slim'
+defaultAlpinenSuite='3.20'
+defaultDebianSuite='bookworm-slim'
 declare -A debianSuite=(
-  [11]='bullseye-slim'
-  [12]='bullseye-slim'
-  [13]='bullseye-slim'
-  [14]='bullseye-slim'
-  [15]='bullseye-slim'
+  [13]='bookworm-slim'
+  [14]='bookworm-slim'
+  [15]='bookworm-slim'
+  [16]='bookworm-slim'
+  [17]='bookworm-slim'
 )
 
 packagesBase='http://apt.postgresql.org/pub/repos/apt/dists/'
@@ -118,8 +118,8 @@ for version in "${versions[@]}"; do
   fi
 
   srcVersion="${pgqFullVersion%%-*}"
-  pgqSha256="$(curl -sSL "https://github.com/pgq/pgq/releases/download/v$srcVersion/pgq-$srcVersion.tar.gz" | sha256sum | awk '{ print $1 }')"
-  pgqdSha256="$(curl -sSL "https://github.com/pgq/pgqd/releases/download/v$srcVersion/pgqd-$srcVersion.tar.gz" | sha256sum | awk '{ print $1 }')"
+  pgqSha256="$(curl -sSL "https://github.com/pgq/pgq/releases/download/v3.5.1/pgq-3.5.1.tar.gz" | sha256sum | awk '{ print $1 }')"
+  pgqdSha256="$(curl -sSL "https://github.com/pgq/pgqd/releases/download/v3.5/pgqd-3.5.tar.gz" | sha256sum | awk '{ print $1 }')"
 
   for variant in alpine; do
     if [ ! -d "$version/$variant" ]; then
