@@ -88,5 +88,6 @@ COPY ./initdb-pgq.sh /docker-entrypoint-initdb.d/10_pgq.sh
 COPY ./update-pgq.sh /usr/local/bin
 COPY docker-entrypoint-pgq.sh /usr/local/bin/
 
+USER postgres
 ENTRYPOINT ["docker-entrypoint-pgq.sh"]
 CMD ["postgres"]
