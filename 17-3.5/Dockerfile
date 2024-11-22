@@ -2,18 +2,18 @@
 # NOTE: THIS DOCKERFILE IS GENERATED VIA "make update"! PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM postgres:12-bullseye
+FROM postgres:17-bookworm
 
-LABEL maintainer="Zachary Koesters <zachary@koesters.io>"
+LABEL maintainer="Zachary Koesters <zachary@koeste.rs>"
 
-ENV PGQ_VERSION 3.5-1.pgdg110+1
+ENV PGQ_VERSION=3.5-4.pgdg120+1
 
 RUN apt-get update \
-      && apt-cache showpkg postgresql-$PG_MAJOR-pgq3-$POSTGIS_MAJOR \
+      && apt-cache showpkg postgresql-$PG_MAJOR-pgq3 \
       && apt-get install -y --no-install-recommends \
            ca-certificates \
            \
-           pgqd=$PGQ_VERSION \
+           pgqd=3.5-1 \
            postgresql-$PG_MAJOR-pgq3=$PGQ_VERSION \
       && rm -rf /var/lib/apt/lists/* \
       && mkdir -p /var/run/pgqd \

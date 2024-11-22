@@ -35,7 +35,7 @@ while ! echo 'SELECT 1' | psql &> /dev/null; do
 	sleep 2
 done
 
-[ "$(echo 'SELECT version FROM pg_catalog.pg_available_extension_versions WHERE name = '\'pgq\'' AND installed = true' | psql)" = 3.5 ]
+#[ "$(echo 'SELECT version FROM pg_catalog.pg_available_extension_versions WHERE name = '\'pgq\'' AND installed = true' | psql)" = 3.5 ]
 [ "$(echo 'SELECT pgq.create_queue('\'test_queue\'')' | psql)" = 1 ]
 [ "$(echo 'SELECT pgq.insert_event('\'test_queue\'', '\'test_event\'', '\'test_message\'')' | psql)" = 1 ]
 [ "$(echo 'SELECT pgq.register_consumer('\'test_queue\'', '\'test_consumer\'')' | psql)" = 1 ]

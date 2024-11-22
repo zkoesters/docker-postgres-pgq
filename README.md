@@ -1,6 +1,6 @@
 # zkoesters/postgres-pgq
 
-The `zkoesters/postgres-pgq` image provides tags for running Postgres with the [PGQ](https://github.com/pgq/pgq) extension installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides debian and alpine variants for PGQ 3.5 for each supported version of Postgres (11, 12, 13, 14 and 15).
+The `zkoesters/postgres-pgq` image provides tags for running Postgres with the [PGQ](https://github.com/pgq/pgq) extension installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides debian and alpine variants for PGQ 3.5 for each supported version of Postgres (13, 14, 15, 16 and 17).
 
 This image ensures that the default database created by the parent `postgres` image will have the following extensions installed:
 
@@ -10,7 +10,7 @@ Unless `-e POSTGRES_DB` is passed to the container at startup time, this databas
 
 # Versions ( 2023-03-11 )
 
-Recomended version for the new users: `zkoesters/postgres-pgq:15-3.5`
+Recomended version for the new users: `zkoesters/postgres-pgq:17-3.5`
 
 ### Debian based ( recommended ):
 
@@ -19,25 +19,25 @@ Recomended version for the new users: `zkoesters/postgres-pgq:15-3.5`
 
 | DockerHub image | Dockerfile | OS | Postgres | PGQ |
 | --------------- | ---------- | -- | -------- | --- |
-| [zkoesters/postgres-pgq:11-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=11-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/11-3.5/Dockerfile) | debian:bullseye | 11 | 3.5 |
-| [zkoesters/postgres-pgq:12-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=12-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/12-3.5/Dockerfile) | debian:bullseye | 12 | 3.5 |
-| [zkoesters/postgres-pgq:13-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=13-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/13-3.5/Dockerfile) | debian:bullseye | 13 | 3.5 |
-| [zkoesters/postgres-pgq:14-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=14-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/14-3.5/Dockerfile) | debian:bullseye | 14 | 3.5 |
-| [zkoesters/postgres-pgq:15-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=15-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/15-3.5/Dockerfile) | debian:bullseye | 15 | 3.5 |
+| [zkoesters/postgres-pgq:13-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=13-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/13-3.5/Dockerfile) | debian:bookworm | 13 | 3.5 |
+| [zkoesters/postgres-pgq:14-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=14-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/14-3.5/Dockerfile) | debian:bookworm | 14 | 3.5 |
+| [zkoesters/postgres-pgq:15-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=15-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/15-3.5/Dockerfile) | debian:bookworm | 15 | 3.5 |
+| [zkoesters/postgres-pgq:16-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=16-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/16-3.5/Dockerfile) | debian:bookworm | 16 | 3.5 |
+| [zkoesters/postgres-pgq:17-3.5](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=17-3.5) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/17-3.5/Dockerfile) | debian:bookworm | 17 | 3.5 |
 
 ### Alpine based
 
 * base os = [Alpine linux](https://alpinelinux.org/): designed to be small, simple and secure ; [musl libc](https://musl.libc.org/) based
-* alpine:3.17; pgq=3.5
+* alpine:3.20; pgq=3.5.1
 * PGQ has been compiled from source ; harder to extend
 
-| DockerHub image | Dockerfile | OS | Postgres | PGQ |
-| --------------- | ---------- | -- | -------- | --- |
-| [zkoesters/postgres-pgq:11-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=11-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/11-3.5/alpine/Dockerfile) | alpine:3.17 | 11 | 3.5 |
-| [zkoesters/postgres-pgq:12-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=12-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/12-3.5/alpine/Dockerfile) | alpine:3.17 | 12 | 3.5 |
-| [zkoesters/postgres-pgq:13-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=13-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/13-3.5/alpine/Dockerfile) | alpine:3.17 | 13 | 3.5 |
-| [zkoesters/postgres-pgq:14-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=14-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/14-3.5/alpine/Dockerfile) | alpine:3.17 | 14 | 3.5 |
-| [zkoesters/postgres-pgq:15-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=15-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/15-3.5/alpine/Dockerfile) | alpine:3.17 | 15 | 3.5 |
+| DockerHub image | Dockerfile | OS          | Postgres | PGQ   |
+| --------------- | ---------- |-------------| -------- |-------|
+| [zkoesters/postgres-pgq:13-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=13-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/13-3.5/alpine/Dockerfile) | alpine:3.20 | 13 | 3.5.1 |
+| [zkoesters/postgres-pgq:14-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=14-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/14-3.5/alpine/Dockerfile) | alpine:3.20 | 14 | 3.5.1 |
+| [zkoesters/postgres-pgq:15-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=15-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/15-3.5/alpine/Dockerfile) | alpine:3.20 | 15 | 3.5.1 |
+| [zkoesters/postgres-pgq:16-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=16-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/16-3.5/alpine/Dockerfile) | alpine:3.20 | 16 | 3.5.1 |
+| [zkoesters/postgres-pgq:17-3.5-alpine](https://registry.hub.docker.com/r/zkoesters/postgres-pgq/tags?page=1&name=17-3.5-alpine) | [Dockerfile](https://github.com/zkoesters/docker-postgres-pgq/blob/master/17-3.5/alpine/Dockerfile) | alpine:3.20 | 17 | 3.5.1 |
 
 ## Usage
 
