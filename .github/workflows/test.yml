@@ -10,7 +10,16 @@ jobs:
   test:
     name: Image Tests
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - version: '13-3.5'
+          - version: '14-3.5'
+          - version: '15-3.5'
+          - version: '16-3.5'
+          - version: '17-3.5'
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - run: make test
+      - run: make test-${{ matrix.version }}
