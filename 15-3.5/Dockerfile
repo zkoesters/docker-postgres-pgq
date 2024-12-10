@@ -6,22 +6,25 @@ FROM postgres:15-bookworm
 
 LABEL maintainer="Zachary Koesters <zachary@koeste.rs>"
 
+ENV PG_MAJOR=15
 ENV PGQ_VERSION=3.5-4.pgdg120+1
+ENV PGQD_VERSION=3.5-2.pgdg120+1
 
 RUN apt-get update \
-      && apt-cache showpkg postgresql-$PG_MAJOR-pgq3 \
+      && apt-cache showpkg postgresql-"$PG_MAJOR"-pgq3 \
       && apt-get install -y --no-install-recommends \
            ca-certificates \
            \
-           pgqd=3.5-1 \
-           postgresql-$PG_MAJOR-pgq3=$PGQ_VERSION \
+           pgqd="$PGQD_VERSION" \
+           postgresql-"$PG_MAJOR"-pgq3="$PGQ_VERSION" \
       && rm -rf /var/lib/apt/lists/* \
       && mkdir -p /var/run/pgqd \
       && chown postgres:postgres /var/run/pgqd \
       && mkdir -p /usr/local/share/pgqd \
-      && chown postgres:postgres /usr/local/share/pgqd
+      && chown postgres:postgres /usr/local/share/pgqd \
+      && mkdir -p /docker-entrypoint-initdb.d
 
-RUN mkdir -p /docker-entrypoint-initdb.d
+COPY --from=tianon/gosu:1.17-bookworm /gosu /usr/local/bin/
 COPY ./initdb-pgq.sh /docker-entrypoint-initdb.d/10_pgq.sh
 COPY ./update-pgq.sh /usr/local/bin
 COPY docker-entrypoint-pgq.sh /usr/local/bin/

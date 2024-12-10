@@ -6,10 +6,13 @@ FROM postgres:16-alpine3.20
 
 LABEL maintainer="Zachary Koesters <zachary@koeste.rs>"
 
-ENV PGQ_VERSION=3.5
+ENV PGQ_VERSION=3.5.1
+ENV PGQD_VERSION=3.5
 ENV PGQ_SHA256=c5ab6f17138979e409aba412ecc3064ace8bbe334ee5d3fc00556ceecb820755
 ENV PGQD_SHA256=a666e5e735f093ef09823ef0df1ba562b52e8fc9081ba1c8b3c3d662658f4916
 
+ADD --checksum=sha256:"$PGQ_SHA256" https://github.com/pgq/pgq/releases/download/v"$PGQ_VERSION"/pgq-"$PGQ_VERSION".tar.gz pgq.tar.gz
+ADD --checksum=sha256:"$PGQD_SHA256" https://github.com/pgq/pgqd/releases/download/v"$PGQD_VERSION"/pgqd-"$PGQD_VERSION".tar.gz pgqd.tar.gz
 
 RUN set -eux \
     \
@@ -20,8 +23,6 @@ RUN set -eux \
     \
 # get PGQ
     \
-    && wget -O pgq.tar.gz "https://github.com/pgq/pgq/releases/download/v3.5.1/pgq-3.5.1.tar.gz" \
-    && echo "${PGQ_SHA256} *pgq.tar.gz" | sha256sum -c - \
     && mkdir -p /usr/src/pgq \
     && tar \
         --extract \
@@ -32,8 +33,6 @@ RUN set -eux \
     \
 # get PGQD
     \
-    && wget -O pgqd.tar.gz "https://github.com/pgq/pgqd/releases/download/v3.5/pgqd-3.5.tar.gz" \
-    && echo "${PGQD_SHA256} *pgqd.tar.gz" | sha256sum -c - \
     && mkdir -p /usr/src/pgqd \
     && tar \
         --extract \
@@ -84,6 +83,7 @@ RUN set -eux \
     && mkdir -p /usr/local/share/pgqd \
     && chown postgres:postgres /usr/local/share/pgqd
 
+COPY --from=tianon/gosu:1.17-alpine3.20 /gosu /usr/local/bin/
 COPY ./initdb-pgq.sh /docker-entrypoint-initdb.d/10_pgq.sh
 COPY ./update-pgq.sh /usr/local/bin
 COPY docker-entrypoint-pgq.sh /usr/local/bin/
